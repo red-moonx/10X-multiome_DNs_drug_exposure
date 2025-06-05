@@ -338,7 +338,6 @@ UMIs_and_features <- nUMIs_plot / nGenes_plot
 # dev.off()
 
 
-
 # ========== Evaluate Dopaminergic Signature ==========
 
 DN.conos.sub.processed.metadata <- DN.conos.sub.processed.metadata %>% 
@@ -384,7 +383,7 @@ samplePerCluster_plot = ggplot() +
   labs(title = "Contribution of each sample to each DN-cluster", x= "", y= "%cells") +
   geom_text(aes(seurat_clusters, 100 + 2, label = label, fill = NULL), size = 5,  data = sample_perCluster)
 
-# ========== Evaluate Dopaminergic Signature ==========
+# ========== Back-up files ==========
 
 #write_tsv(DN.conos.sub.processed.metadata %>% rownames_to_column("cellNames"), ../results/DN.conos.sub.processed.metadata.tsv", col_names = NA)
 #saveRDS(DN.conos.sub, "../results/DN.conos.sub.rds")
