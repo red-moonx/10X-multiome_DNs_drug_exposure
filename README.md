@@ -1,6 +1,6 @@
 # Analysis of single-cell chromatin and transcriptional dynamics following drug exposure
 
-Welcome! This GitHub repository is complementary to our manuscript (in preparation) exploring how a single exposure to cocaine alters chromatin accessibility and gene expression in dopamine neurons over time. Using paired single-nucleus ATAC-seq and RNA-seq from the ventral tegmental area (VTA), we investigate the temporal dynamics of neuronal activation and long-term molecular memory.
+Welcome! This GitHub repository is complementary to my PhD thesis and our manuscript (currently in preparation) exploring how a single exposure to cocaine alters chromatin accessibility and gene expression in dopamine neurons (DNs) over time. Using paired single-nucleus ATAC-seq and RNA-seq from the ventral tegmental area (VTA), we investigate the temporal dynamics of neuronal activation and long-term molecular memory.
 
 All the figures in the manuscript and extended data can be reproduced using the scripts in this repository.
 
