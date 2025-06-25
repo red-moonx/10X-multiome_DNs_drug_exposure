@@ -1,0 +1,65 @@
+HGNC_ID_gene	Approved_symbol	Approved_name	Previous_symbols	Aliases	Chromosome
+HGNC:241	ADCYAP1	adenylate cyclase activating polypeptide 1		PACAP	18p11.32
+HGNC:259	ADM	adrenomedullin		AM	11p15.4
+HGNC:28898	ADM2	adrenomedullin 2		AM2,FLJ21135	22q13.33
+HGNC:330	AGRP	agouti related neuropeptide		Agrt,ART,ASIP2	16q22.1
+HGNC:333	AGT	angiotensinogen	SERPINA8		1q42.2
+HGNC:16665	APLN	apelin		apelin,XNPEP2	Xq26.1
+HGNC:894	AVP	arginine vasopressin	ARVP	ADH	20p13
+HGNC:1437	CALCA	calcitonin related polypeptide alpha	CALC1	CGRP,CGRP-alpha	11p15.2
+HGNC:1438	CALCB	calcitonin related polypeptide beta	CALC2	FLJ30166,CGRP-II	11p15.2
+HGNC:1569	CCK	cholecystokinin			3p22.1
+HGNC:1929	CHGA	chromogranin A		PHE5,PHES	14q32.12
+HGNC:2355	CRH	corticotropin releasing hormone		CRF,CRH1	8q13.1
+HGNC:4114	GAL	galanin and GMAP prepropeptide	GALN	GMAP,GAL-GMAP,GLNN	11q13.2
+HGNC:24840	GALP	galanin like peptide		GAL	19q13.43
+HGNC:4164	GAST	gastrin	GAS		17q21.2
+HGNC:4265	GHRH	growth hormone releasing hormone	GHRF		20q11.23
+HGNC:18129	GHRL	ghrelin and obestatin prepropeptide		MTLRP,ghrelin,obestatin	3p25.3
+HGNC:4270	GIP	gastric inhibitory polypeptide			17q21.32
+HGNC:4419	GNRH1	gonadotropin releasing hormone 1	GRH,GNRH,LHRH		8p21.2
+HGNC:4420	GNRH2	gonadotropin releasing hormone 2			20p13
+HGNC:4605	GRP	gastrin releasing peptide			18q21.32
+HGNC:4847	HCRT	hypocretin neuropeptide precursor		PPOX,OX	17q21.2
+HGNC:5329	IAPP	islet amyloid polypeptide		AMYLIN,DAP,IAP	12p12.1
+HGNC:5464	IGF1	insulin like growth factor 1		IGF1A,IGFI,IGF-I,IGF	12q23.2
+HGNC:5466	IGF2	insulin like growth factor 2	C11orf43	FLJ44734,IGF-II	11p15.5
+HGNC:6081	INS	insulin	IDDM2,IDDM1		11p15.5
+HGNC:6341	KISS1	KiSS-1 metastasis suppressor			1q32.1
+HGNC:6383	KNG1	kininogen 1	KNG,BDK,HK	BK,HMWK	3q27.3
+HGNC:6553	LEP	leptin	OBS,OB		7q32.1
+HGNC:7141	MLN	motilin			6p21.31
+HGNC:32203	NMS	neuromedin S			2q11.2
+HGNC:7859	NMU	neuromedin U			4q12
+HGNC:30099	NPB	neuropeptide B		PPL7,PPNPB	17q25.3
+HGNC:7901	NPFF	neuropeptide FF-amide peptide precursor		FMRFAL	12q13.13
+HGNC:7939	NPPA	natriuretic peptide A	ANP,PND		1p36.22
+HGNC:7940	NPPB	natriuretic peptide B			1p36.22
+HGNC:7941	NPPC	natriuretic peptide C		CNP	2q37.1
+HGNC:33940	NPS	neuropeptide S			10q26.2
+HGNC:13782	NPVF	neuropeptide VF precursor	C7orf9	RFRP	7p15.3
+HGNC:30509	NPW	neuropeptide W		PPL8	16p13.3
+HGNC:7955	NPY	neuropeptide Y		PYY4	7p15.3
+HGNC:8038	NTS	neurotensin			12q21.31
+HGNC:8528	OXT	oxytocin/neurophysin I prepropeptide	OT	OXT-NPI,OT-NPI	20p13
+HGNC:8820	PDYN	prodynorphin	SCA23	PENKB,ADCA	20p13
+HGNC:8831	PENK	proenkephalin			8q12.1
+HGNC:9109	PMCH	pro-melanin concentrating hormone		MCH	12q23.2
+HGNC:9163	PNOC	prepronociceptin		PPNOC,N/OFQ,NOP	8p21.1
+HGNC:9201	POMC	proopiomelanocortin		MSH,POC,CLIP,ACTH,NPP,LPH	2p23.3
+HGNC:9327	PPY	pancreatic polypeptide		PNP	17q21.31
+HGNC:9445	PRL	prolactin			6p22.3
+HGNC:17945	PRLH	prolactin releasing hormone		PRH	2q37.3
+HGNC:9607	PTHLH	parathyroid hormone like hormone		PTHRP,HHM,PLP,PTHR	12p11.22
+HGNC:9748	PYY	peptide YY		PYY1	17q21.31
+HGNC:10026	RLN1	relaxin 1		H1	9p24.1
+HGNC:10027	RLN2	relaxin 2		H2,RLXH2,bA12D24.1.1,bA12D24.1.2	9p24.1
+HGNC:17135	RLN3	relaxin 3		ZINS4,RXN3,H3	19p13.12
+HGNC:10607	SCT	secretin			11p15.5
+HGNC:11329	SST	somatostatin		SMST,SST1	3q27.3
+HGNC:12298	TRH	thyrotropin releasing hormone			3q22.1
+HGNC:12516	UCN	urocortin		UROC,UI,UCN1	2p23.3
+HGNC:18414	UCN2	urocortin 2		UCNI,SRP,URP,UCN-II	3p21.31
+HGNC:17781	UCN3	urocortin 3		UCNIII,SPC	10p15.1
+HGNC:12636	UTS2	urotensin 2		UII,U-II,UCN2,PRO1068	1p36.23
+HGNC:12693	VIP	vasoactive intestinal peptide			6q25.2

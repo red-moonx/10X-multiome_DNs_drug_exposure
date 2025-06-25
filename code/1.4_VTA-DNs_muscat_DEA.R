@@ -1,7 +1,7 @@
 # ===========================================
 # Script Title: 1.4 VTA-specific DEA with Muscat
 # Author: Luna Zea
-# Date: 2025-06-05 (for github)
+# Date: 2025-06-24 (for github)
 # Description:
 #   This script performs differential gene expression analysis (DEA) using Muscat on 
 #   VTA-specific DN cells. We run each vs. saline and each vs. preceding comparisons. 
@@ -92,8 +92,8 @@ for (analysis in all_analysis) {
   print(analysis)
   sce <- DNs.RNA.sce # Keep DNs.RNA.sce as unaltered copy
   dir <- glue("/fast/AG_Pombo/luna/2023_vta_multiome/3_conos/1_230418_conos_DN_eval/2_temporalRNA/230907.discrete.analysis.final/230926.excluding_putative_SN_cells/230929.max.resolution.RNAonly/231002_muscat_VTAvsSN_all_subtypes/{analysis}/")
-  dir.create(dir)
-  setwd(dir)
+  #dir.create(dir)
+  #setwd(dir)
   
   #Plot samples info
   samples.coldata <- as.data.frame(coldata.dataframe) %>% dplyr::select(ident, simpleIdent, analysis)
@@ -112,7 +112,7 @@ for (analysis in all_analysis) {
     guides(fill=guide_legend(title="Sample")) +
     facet_wrap(~variable)
   samples.coldata.plot
-  ggsave(filename = glue("{dir}/{analysis}_samples.coldata.plot.png"), samples.coldata.plot, units = "px", device = "png",width=5000,height=2400,dpi = 300)
+  #ggsave(filename = glue("{dir}/{analysis}_samples.coldata.plot.png"), samples.coldata.plot, units = "px", device = "png",width=5000,height=2400,dpi = 300)
   
   #Reduce number of genes and normalize
   sce <- sce[rowSums(counts(sce) > 0) > 0, ]
@@ -132,8 +132,8 @@ for (analysis in all_analysis) {
   
   # plot genes info
   #Genes:
-  gene_categories <- c("Non-detected", "Lowly-expressed", "Being tested")
-  gene_numbers <- c(nondetected, lowly_expressed, tested)
+  gene_categories <- c("Non-detected", "Being tested")
+  gene_numbers <- c(nondetected, tested)
   gene_info <- data.frame(gene_categories, gene_numbers)
   gene_info$gene_categories <- factor(gene_info$gene_categories, levels = gene_categories)
   genes_colors <- c("#1B1B1E", "#1B4B5D", "#F09E05")
@@ -147,7 +147,7 @@ for (analysis in all_analysis) {
                                                    axis.title.x=element_blank(), axis.title.y=element_blank(), axis.ticks.x=element_blank(), axis.text.x = element_blank()) +
     guides(fill=guide_legend(title="Gene categories"))
   genes_info.plot
-  ggsave(filename = glue("{dir}/{analysis}_genes_info.plot.png"), genes_info.plot, units = "px", device = "png",width=5000,height=2400,dpi = 300)
+  #ggsave(filename = glue("{dir}/{analysis}_genes_info.plot.png"), genes_info.plot, units = "px", device = "png",width=5000,height=2400,dpi = 300)
   
   
   
@@ -244,7 +244,7 @@ for (analysis in all_analysis) {
   pb_mds 
   
   muscat_plots <- DR + pb_mds
-  ggsave(filename = glue("{dir}/muscat_plots.png"), muscat_plots, units = "px", device = "png",width=5000,height=3000,dpi = 300)
+  #ggsave(filename = glue("{dir}/muscat_plots.png"), muscat_plots, units = "px", device = "png",width=5000,height=3000,dpi = 300)
   
   #Sample-level analysis: Pseudobulk 
   ##########################################
@@ -273,8 +273,8 @@ for (analysis in all_analysis) {
   #I cannot work with m30 (one replicate)
   dir <- glue("/fast/AG_Pombo/luna/2023_vta_multiome/3_conos/1_230418_conos_DN_eval/2_temporalRNA/230907.discrete.analysis.final/230926.excluding_putative_SN_cells/230929.max.resolution.RNAonly/231002_muscat_VTAvsSN_all_subtypes//{analysis}/")
   setwd(dir)
-  dir.create("deg_results")
-  dir.create("volcano_and_MA")
+  #dir.create("deg_results")
+  #dir.create("volcano_and_MA")
   
   DEG_complete_results <-data.frame()
   for (contrast in all_contrasts) {
@@ -302,7 +302,7 @@ for (analysis in all_analysis) {
     
   }
   
-  write_tsv(DEG_complete_results, glue("deg_results/231002_DEG_complete_results_{analysis}.tsv"))
+  #write_tsv(DEG_complete_results, glue("deg_results/231002_DEG_complete_results_{analysis}.tsv"))
   
   
   # ========== 3. DEG Summary Plot (per cluster, per contrast) ==========
@@ -323,7 +323,7 @@ for (analysis in all_analysis) {
   DEG.info.melt$percent5 <- as.character(DEG.info.melt$percent5)
   DEG.info.melt$percent5 <- ifelse(DEG.info.melt$percent5 == "Yes", DEG.info.melt$cluster_id, DEG.info.melt$percent5) 
   
-  #Temporal code (221011)
+  #Temporary code (221011)
   DEG.info.melt.saline <- DEG.info.melt %>% filter(variable %in% saline_contrasts)
   DEG.info.melt.previous <- DEG.info.melt %>% filter(variable %in% time_contrasts)
   
@@ -331,13 +331,13 @@ for (analysis in all_analysis) {
     geom_bar(aes(y = value, x = variable, fill = percent5), stat="identity") +
     geom_text(data=DEG.info.melt, aes(x = variable, y = as.numeric(value), label = value, size=16, fill = percent5), col= "white", position = position_stack(vjust = 0.5), show.legend = F) + 
     scale_fill_manual(values= percent5_colors) + theme_classic() + ggtitle(glue("Number of DEGs per contrast:")) +
-    theme(legend.position = "bottom", 
+    theme(legend.position = "DEG_complete_resultsbottom", 
           axis.title.x=element_blank(), axis.title.y=element_blank()) +
     guides(fill=guide_legend(title="Detected in >5% of cells")) +
     facet_wrap(~cluster_id, ncol = 1)
   
   DEG.info.plot
-  ggsave(filename = glue("{dir}/deg_results/DEG.info.plot.png"), DEG.info.plot, units = "px", device = "png",width=2100,height=1500,dpi = 300)
+  #ggsave(filename = glue("{dir}/deg_results/DEG.info.plot.png"), DEG.info.plot, units = "px", device = "png",width=2100,height=1500,dpi = 300)
   
   a <- DEG.info.plot
   
@@ -400,7 +400,7 @@ for (analysis in all_analysis) {
       guides(fill=guide_legend(title="Detected in >5% of cells")) +
       facet_wrap(~ cluster_id)
     
-    ggsave(filename = glue("volcano_and_MA/{comparison}.volcano.png"), volcano_plot, units = "px", device = "png",width=5000,height=3000,dpi = 300)
+    #ggsave(filename = glue("volcano_and_MA/{comparison}.volcano.png"), volcano_plot, units = "px", device = "png",width=5000,height=3000,dpi = 300)
     
     MA_plot <- ggplot(plot.data, aes(x = logCPM, y = logFC)) +
       geom_point(aes(color = significant_and_5per)) +
@@ -417,226 +417,8 @@ for (analysis in all_analysis) {
            y="Log (FC)") +
       theme(legend.position = "bottom", legend.title = element_blank()) + 
       facet_wrap(~ cluster_id)
-    ggsave(filename = glue("volcano_and_MA/{comparison}.MA.png"), MA_plot, units = "px", device = "png",width=5000,height=2000,dpi = 300)
+    #ggsave(filename = glue("volcano_and_MA/{comparison}.MA.png"), MA_plot, units = "px", device = "png",width=5000,height=2000,dpi = 300)
     
-  }
-  
-  # ========== 5. Heatmap: All DEGs per Group ==========
-  saline_contrasts <-c("h1_cocaine-saline", "h4_cocaine-saline", "h8_cocaine-saline", "h24_cocaine-saline", "d14_cocaine-saline")
-  time_contrasts <- c("h1_cocaine-saline", "h4_cocaine-h1_cocaine", "h8_cocaine-h4_cocaine", "h24_cocaine-h8_cocaine", "d14_cocaine-h24_cocaine")
-  
-  #kids_clusters <- get(glue("kids_{analysis}"))
-  dir <- glue("/fast/AG_Pombo/luna/2023_vta_multiome/3_conos/1_230418_conos_DN_eval/2_temporalRNA/230907.discrete.analysis.final/230926.excluding_putative_SN_cells/230926.muscat/{analysis}")
-  setwd(dir)
-  
-  groups <- names(table(coldata.dataframe$Analysis2))
-  
-  #each vs saline
-  dirplots <- glue("{dir}/salines")  
-  dir.create(dirplots)
-  for (i in 1:length(groups)) {
-    clusterID = groups[i]
-    heatmap_genes <- DEG_complete_results %>%
-      filter(contrast %in% saline_contrasts,
-             significant != "No significant",  #Changed this bit to include also < 5%
-             cluster_id == clusterID) %>% select("gene") %>% pull()
-    
-    if (length(heatmap_genes != 0)) {
-      seu.temporal <- DNs.RNA.seu[, DNs.RNA.seu$region == clusterID]
-      # seu.temporal@assays[["ATAC"]] <- NULL
-      # seu.temporal@assays[["SCT"]] <- NULL
-      # seu.temporal@assays[["peaks"]] <- NULL
-      
-      #Calculate average expression and format columns
-      Idents(seu.temporal) <- "orig.ident"
-      seu.temporal.avgexp = as.data.frame(AverageExpression(seu.temporal, group.by = 'orig.ident')) 
-      names(seu.temporal.avgexp) <- substring(names(seu.temporal.avgexp), 5)
-      
-      DEG_perGroup_results <- DEG_complete_results %>% filter(cluster_id == clusterID, 
-                                                              contrast %in% saline_contrasts)
-      
-      #Extract DEGs from the big table and create metadata
-      DEG_withIDs <- DEG_perGroup_results %>% 
-        filter(significant != "No significant") %>% distinct(gene, .keep_all = TRUE) %>% 
-        mutate(groupID = ifelse(logFC < 0, control, query)) %>% 
-        arrange(factor(groupID, levels = condition_names)) 
-      
-      seu.DEGs.avgexp.heatmap <- seu.temporal.avgexp %>% rownames_to_column("gene") %>% 
-        filter(gene %in% DEG_withIDs$gene) %>% column_to_rownames("gene")
-      
-      seu.DEGs.avgexp.heatmap <- seu.DEGs.avgexp.heatmap[DEG_withIDs$gene, ]
-      
-      
-      #Prepare matrix for heatmap (in the order I want to be plotted)
-      mat <- as.matrix(seu.DEGs.avgexp.heatmap)
-      mat_scaled = t(scale(t(mat)))[, levels(samples.coldata$ident)]
-      
-      condition <- samples.coldata %>% filter(variable == clusterID) %>% arrange(ident) %>% select(simpleIdent) %>% pull()
-      cluster <- factor(DEG_withIDs$groupID, levels = condition_names) #heatmap cluster
-      heatmap_color = colorRampPalette(rev(brewer.pal(n = 7, name ="RdYlBu")))(100)  
-      
-      ha = HeatmapAnnotation(Condition = condition, show_legend = FALSE, 
-                             col = list(Condition = condition_colors), show_annotation_name = FALSE)
-      row_ha = rowAnnotation(Cluster = cluster, show_legend = FALSE, 
-                             col = list(Cluster = condition_colors, show_annotation_name = FALSE, simple_anno_size = unit(3, "mm"), labels = NULL))
-      
-      
-      htmp <- Heatmap(mat_scaled, cluster_columns = FALSE, cluster_rows = FALSE, name = "Z-score", column_split =condition, row_split =cluster, row_title = NULL, show_row_names = FALSE,
-                      show_column_names = FALSE, top_annotation = ha, right_annotation = row_ha, col = heatmap_color, heatmap_legend_param = list(direction = "horizontal"))
-      
-      
-      htmp_save <- draw(htmp, heatmap_legend_side = "bottom")
-      
-      dev.off()
-      jpeg(glue("{dirplots}/{clusterID}.salines.DEGs.heatmap.jpeg"), bg = "transparent", width=600, height=700, units = "px")
-      print(htmp_save)
-      dev.off()
-    }
-  }
-  
-
-  # each vs preceding
-  dirplots <- "/fast/AG_Pombo/luna/2023_vta_multiome/3_conos/1_230418_conos_DN_eval/2_temporalRNA/230907.discrete.analysis.final/230926.excluding_putative_SN_cells/230926.muscat/Analysis2/times"
-  dir.create(dirplots)
-  for (i in 1:length(groups)) {
-    heatmap_genes <- DEG_complete_results %>%
-      filter(contrast %in% time_contrasts,
-             significant != "No significant",  #Changed this bit to include also < 5%
-             cluster_id == clusterID) %>% select("gene") %>% pull()
-    
-    if (length(heatmap_genes != 0)) {
-      seu.temporal <- DNs.RNA.seu[, DNs.RNA.seu$region == clusterID]
-      # seu.temporal@assays[["ATAC"]] <- NULL
-      # seu.temporal@assays[["SCT"]] <- NULL
-      # seu.temporal@assays[["peaks"]] <- NULL
-      
-      #Calculate average expression and format columns
-      Idents(seu.temporal) <- "orig.ident"
-      seu.temporal.avgexp = as.data.frame(AverageExpression(seu.temporal, group.by = 'orig.ident')) 
-      names(seu.temporal.avgexp) <- substring(names(seu.temporal.avgexp), 5)
-      
-      DEG_perGroup_results <- DEG_complete_results %>% filter(cluster_id == clusterID, 
-                                                              contrast %in% time_contrasts)
-      
-      #Extract DEGs from the big table and create metadata
-      DEG_withIDs <- DEG_perGroup_results %>% 
-        filter(significant != "No significant") %>% distinct(gene, .keep_all = TRUE) %>% 
-        mutate(groupID = ifelse(logFC < 0, control, query)) %>% 
-        arrange(factor(groupID, levels = condition_names)) 
-      
-      seu.DEGs.avgexp.heatmap <- seu.temporal.avgexp %>% rownames_to_column("gene") %>% 
-        filter(gene %in% DEG_withIDs$gene) %>% column_to_rownames("gene")
-      
-      seu.DEGs.avgexp.heatmap <- seu.DEGs.avgexp.heatmap[DEG_withIDs$gene, ]
-      
-      
-      #Prepare matrix for heatmap (in the order I want to be plotted)
-      mat <- as.matrix(seu.DEGs.avgexp.heatmap)
-      mat_scaled = t(scale(t(mat)))[, levels(samples.coldata$ident)]
-      
-      condition <- samples.coldata %>% filter(variable == clusterID) %>% arrange(ident) %>% select(simpleIdent) %>% pull()
-      cluster <- factor(DEG_withIDs$groupID, levels = condition_names) #heatmap cluster
-      heatmap_color = colorRampPalette(rev(brewer.pal(n = 7, name ="RdYlBu")))(100)  
-      
-      ha = HeatmapAnnotation(Condition = condition, show_legend = FALSE, 
-                             col = list(Condition = condition_colors), show_annotation_name = FALSE)
-      row_ha = rowAnnotation(Cluster = cluster, show_legend = FALSE, 
-                             col = list(Cluster = condition_colors), show_annotation_name = FALSE, simple_anno_size = unit(3, "mm"), labels = NULL)
-      
-      
-      htmp <- Heatmap(mat_scaled, cluster_columns = FALSE, cluster_rows = FALSE, name = "Z-score", column_split =condition, row_split =cluster, row_title = NULL, show_row_names = FALSE,
-                      show_column_names = FALSE, top_annotation = ha, right_annotation = row_ha, col = heatmap_color, heatmap_legend_param = list(direction = "horizontal"))
-      
-      
-      htmp_save <- draw(htmp, heatmap_legend_side = "bottom")
-      
-      dev.off()
-      jpeg(glue("{dirplots}/{clusterID}.time.DEGs.heatmap.jpeg"), width=600, height=700, units = "px")
-      print(htmp_save)
-      dev.off()
-    }
-  }
-  
-  # ========== 6. EXTRA: ARGs heatmap ==========
-  for (i in 1:length(groups)) {
-    heatmap_genes <- DEG_complete_results %>%
-      filter(contrast %in% time_contrasts,
-             significant != "No significant",  #Changed this bit to include also < 5%
-             cluster_id == clusterID) %>% select("gene") %>% pull()
-    
-    if (length(heatmap_genes != 0)) {
-      seu.temporal <- DNs.RNA.seu[, DNs.RNA.seu$region == clusterID]
-      # seu.temporal@assays[["ATAC"]] <- NULL
-      # seu.temporal@assays[["SCT"]] <- NULL
-      # seu.temporal@assays[["peaks"]] <- NULL
-      
-      #Calculate average expression and format columns
-      Idents(seu.temporal) <- "orig.ident"
-      seu.temporal.avgexp = as.data.frame(AverageExpression(seu.temporal, group.by = 'orig.ident')) 
-      names(seu.temporal.avgexp) <- substring(names(seu.temporal.avgexp), 5)
-      
-      ARG_list <- read_tsv("/fast/AG_Pombo/luna/8_defaultARCreference/4_refineDN_set/2_DEA_muscat_improved/ARG_list_tyssowski.tsv")
-      colnames(ARG_list) <- c("Gene", "ARG_class")
-      
-      ARG_list <- ARG_list %>%filter(ARG_class %in% c("rPRG", "dPRG", "SRG"))
-      
-      seu.temporal.avgexp.ARG <- seu.temporal.avgexp %>% 
-        rownames_to_column("Gene") %>% 
-        filter(Gene %in% ARG_list$Gene,)
-      
-      seu.temporal.avgexp.ARG <- left_join(seu.temporal.avgexp.ARG, ARG_list, by = "Gene")
-      ARGclases <- c("rPRG", "dPRG", "SRG")
-      ARG_colors <- c("#BA7A12", "#B94227", "#087A87")
-      names(ARG_colors) <- ARGclases
-      
-      seu.temporal.avgexp.ARG.melt <- melt(seu.temporal.avgexp.ARG)
-      
-      seu.temporal.avgexp.ARG.melt$variable <- factor(seu.temporal.avgexp.ARG.melt$variable, levels = samples)
-      seu.temporal.avgexp.ARG.melt$ARG_class <- factor(seu.temporal.avgexp.ARG.melt$ARG_class, levels = ARGclases)
-      
-      # ARG.RNAstats <- seu.temporal.avgexp.ARG.melt %>% group_by(ARG_class) %>%
-      #   dplyr::mutate(MedianCounts = median(nCount_RNA)) %>%
-      #   mutate(MedianGenes = median(nFeature_RNA)) %>%
-      #   select(seurat_clusters, MedianCounts, MedianGenes) %>% distinct()
-      
-      ARGs_Gex_plot <- ggplot(seu.temporal.avgexp.ARG.melt, aes(x=ARG_class, y=value, fill = ARG_class, colour = ARG_class))+
-        geom_flat_violin(position = position_nudge(x = .25, y = 0),adjust =2, trim = TRUE)+
-        geom_point(position = position_jitter(width = .15), size = .25)+
-        #geom_boxplot(aes(x = as.numeric(ARG_class)+0.25, y = value),outlier.shape = NA, alpha = 0.3, width = .1, colour = "BLACK") +
-        scale_y_log10() +
-        labs(title = glue("230926: {clusterID} Gene expression per ARG class"), x= "", y= "Gene expression") +
-        geom_hline(yintercept = 0.01, color = "red", linetype = "dashed") +
-        scale_fill_manual(values = ARG_colors) + 
-        scale_color_manual(values = ARG_colors) +
-        theme_minimal() +
-        theme(legend.position = "bottom") +
-        theme(axis.title.x=element_blank(),
-              axis.text.x=element_blank(),
-              axis.ticks.x=element_blank()) +
-        facet_wrap(~variable)
-      ARGs_Gex_plot
-      ggsave(filename = glue("{dir}{clusterID}.ARGs_Gex_plot_v1.png"), ARGs_Gex_plot, units = "px", device = "png",width=4000,height=4000,dpi = 300)
-      
-      ARGs_Gex_sample_plot <- ggplot(seu.temporal.avgexp.ARG.melt, aes(x=variable, y=value, fill = variable, colour = variable))+
-        geom_flat_violin(position = position_nudge(x = .25, y = 0),adjust =2, trim = TRUE)+
-        geom_point(position = position_jitter(width = .15), size = .25)+
-        #geom_boxplot(aes(x = as.numeric(variable)+0.25, y = value),outlier.shape = NA, alpha = 0.3, width = .1, colour = "BLACK") +
-        scale_y_log10() +
-        labs(title = glue("230926: {clusterID} Gene expression of ARG genes per sample"), x= "", y= "Gene expression") +
-        geom_hline(yintercept = 0.01, color = "red", linetype = "dashed") +
-        scale_fill_manual(values = sample_colors) + 
-        scale_color_manual(values = sample_colors) +
-        #theme_minimal() +
-        #theme(legend.position = "bottom") +
-        theme(axis.title.x=element_blank(),
-              axis.text.x=element_blank(),
-              axis.ticks.x=element_blank()) +
-        facet_wrap(~ARG_class, ncol = 1)
-      ARGs_Gex_sample_plot
-      ggsave(filename = glue("{dir}{clusterID}.ARGs_Gex_plot_v2.png"), ARGs_Gex_sample_plot, units = "px", device = "png",width=4000,height=4000,dpi = 300)
-      
-      rm(sce)
-    }
   }
 }
 
