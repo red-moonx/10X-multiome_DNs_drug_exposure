@@ -6,12 +6,13 @@ All the figures in the manuscript and extended data can be reproduced using the 
 
 If you have any questions, comments, or suggestions for improvement, feel free to reach out by opening an issue.
 
+(I'm still adding code to this project)
 
 ## Overview of the repository
 
 This repository contains the following folders:
 
-- **`code`**: R scripts, bash scripts, and Jupyter Notebooks used for preprocessing, integration, and downstream analyses.
+- **`code`**: R scripts, bash scripts, and Jupyter Notebooks used for preprocessing, integration, and downstream analyses. 
 - **`data`**: Processed input files required for the analysis. Raw data should be downloaded separately from GEO.
 - **`figures`**: Empty by default; populated when scripts are executed. Stores generated figures for the manuscript and supplementary materials.
 - **`results`**: Contains non-figure outputs such as gene lists, differential analysis results, motif enrichments, and cluster assignments.
