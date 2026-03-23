@@ -27,8 +27,20 @@ This repository contains the following folders:
 **Overview**  
 Experience-driven stimuli can induce lasting cellular memory through molecular mechanisms, and in the context of addiction, these processes are thought to underlie persistent maladaptive changes long after drug exposure. However, the temporal molecular cascades triggered by a single drug exposure remain poorly understood, particularly at the level of specific neuronal populations. In this project, I set out to investigate genome-wide changes in transcription and chromatin accessibility in dopamine neurons (DNs) from the ventral tegmental area (VTA) following a single cocaine exposure, using paired single-nucleus ATAC-seq and RNA-seq across immediate (0–8h), short-term (24h), and long-term (14d) time points.
 
+<p align="center">
+  <img src="figures/summary/experimental_design.png" width="600">
+  <br>
+  <em>Figure 1. Experimental design and sampling time points following single cocaine exposure.</em>
+</p>
+
 **Transcriptional responses to cocaine exposure**  
 The results show that even a single exposure to cocaine is sufficient to induce widespread and long-lasting transcriptional changes in VTA DNs. In particular, genes that become upregulated are enriched for addiction-associated and psychiatric disorder–related genes, suggesting that early transcriptional activation may already engage pathways linked to long-term vulnerability. Several neuropeptides, including *Cartpt, Ucn, Penk,* and *Npy*, remain upregulated for up to two weeks, pointing to sustained alterations in neuronal signaling. Overall, these findings indicate that transcriptional activation is a dominant feature of the response to cocaine.
+
+<p align="center">
+  <img src="figures/summary/gex_heatmap.png" width="600">
+  <br>
+  <em>Figure 2. Gene expression patterns of DEGs in each vs. saline comparisons.</em>
+</p>
 
 **Temporal gene expression dynamics**  
 To better understand how these changes evolve over time, differential gene expression patterns were organized into distinct temporal trajectories, including Transient, Recovered, Memory, and Delayed responses. This framework reveals that early transcriptional changes are primarily associated with neuronal activation, plasticity, stress responses, and energy metabolism, whereas later changes reflect processes such as metabolic regulation, synaptic remodeling, and RNA processing. Together, these observations suggest a shift from rapid, activity-dependent responses toward more stable and long-lasting cellular reprogramming.
