@@ -100,18 +100,23 @@ if (!all(file.exists(unname(rna_files)))) {
 
 
 
-# ========== 1. Create Arrow Files ==========
-ArrowFiles <- character(0)
+# ========== 1. Create Missing Arrow Files ==========
 
 for (sid in names(fragment_files)) {
   
-  if (file.exists(paste0(sid, ".arrow"))) next
+  arrow_path <- file.path(project_dir, paste0(sid, ".arrow"))
+  
+  # Skip existing Arrow files
+  if (file.exists(arrow_path)) {
+    message("Arrow already exists: ", sid)
+    next
+  }
   
   message("\n===== Processing: ", sid, " =====")
   
   one_file <- fragment_files[[sid]]
   
-  af <- createArrowFiles(
+  createArrowFiles(
     inputFiles = one_file,
     sampleNames = sid,
     outputNames = sid,
@@ -126,15 +131,24 @@ for (sid in names(fragment_files)) {
     subThreading = FALSE
   )
   
-  ArrowFiles <- c(ArrowFiles, af)
-  
   message("Finished: ", sid)
-  print(af)
 }
 
-message("\nAll Arrow files created:")
+# Collect ALL Arrow files (existing + newly created)
+ArrowFiles <- file.path(
+  project_dir,
+  paste0(sample_ids, ".arrow")
+)
+
+# Check that all Arrow files exist
 print(ArrowFiles)
 print(file.exists(ArrowFiles))
+
+if (!all(file.exists(ArrowFiles))) {
+  stop("Some Arrow files are still missing!")
+}
+
+message("\nAll Arrow files are present.")
 
 
 # ========== 2. Create ArchR Project ==========

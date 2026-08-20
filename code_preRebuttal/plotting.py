@@ -15,7 +15,7 @@ def plot_gene_in_time(
         'R1': "#8B2635",
         'R2': "#3E9EB6",
         'R3': "#729C44",
-        'R4': "#F7CB15",
+        'R4': "#BC8034",
     }
 
     # initiate plot
@@ -35,9 +35,9 @@ def plot_gene_in_time(
         mean = adata[(adata.obs[time_key] == time)][:, gene].X.mean()
         mean_per_timepoint.append(mean)
 
-    # plot mean and std (as errorbar)
-    axs.errorbar(timepoints, mean_per_timepoint, yerr=std_per_timepoint, capsize=6)
-    axs.plot(timepoints, mean_per_timepoint,)
+    # plot mean and std (as errorbar) in gray with alpha
+    axs.errorbar(timepoints, mean_per_timepoint, yerr=std_per_timepoint, capsize=6, color="gray", alpha=0.6)
+    axs.plot(timepoints, mean_per_timepoint, color="gray", alpha=0.6)
 
     # plot each replicate as dot with specific color
     for time in timepoints:
@@ -55,12 +55,15 @@ def plot_gene_in_time(
     # remove spines
     axs.spines['left'].set_visible(False)
     axs.spines['top'].set_visible(False)
-
-    fig.text(0.5, 0, 'experimental time', ha='center')
-    fig.text(0.95, 0.5, 'gene expression', va='center', rotation='vertical')
+    
+    # Remove axis labels
+    fig.texts.clear()
+    
+    # Remove X-axis tick labels but keep the ticks
+    axs.set_xticklabels([])
 
     # save figure
     if save:
-        fig.savefig(save_path, bbox_inches='tight', format='png', dpi=300)
+        fig.savefig(save_path, bbox_inches='tight', format='pdf', dpi=300)
 
     plt.show()
