@@ -1,10 +1,18 @@
 # Analysis of single-cell chromatin and transcriptional dynamics following drug exposure
 
-Welcome! This GitHub repository is complementary to my PhD thesis and our manuscript (currently in preparation) exploring how a single exposure to cocaine alters chromatin accessibility and gene expression in dopamine neurons (DNs) over time. Using paired single-nucleus ATAC-seq and RNA-seq from the ventral tegmental area (VTA), we investigate the temporal dynamics of neuronal activation and long-term molecular memory.
+Welcome! This repository accompanies my PhD thesis and our manuscript (currently under peer review), which explores how a single exposure to cocaine alters chromatin accessibility and gene expression in dopamine neurons (DNs) over time.
 
-All the figures in the manuscript and extended data can be reproduced using the scripts in this repository.
+Using paired single-nucleus ATAC-seq and RNA-seq (10x Multiome) from the ventral tegmental area (VTA), we follow a rare neuronal population (~5% of the profiled cells) across six time points to investigate the temporal dynamics of neuronal activation and long-term molecular memory.
 
-This repository contains code used for the analyses in the thesis and manuscript. It is shared for transparency and reproducibility. Please note that the code was developed for research purposes and is not intended to be production-ready or optimized for general use.
+All figures in the manuscript and extended data can be reproduced using the scripts in this repository.
+
+## Design considerations
+
+Given the cost of multiome experiments, the study design prioritized temporal resolution over deep replication at fewer time points, in order to capture the full dynamics of the response. Combined with the rarity of the target population, which limits the number of cells per sample and time point, this led us to use lenient statistical thresholds in this discovery-oriented analysis. Key findings are currently being validated through follow-up experiments and orthogonal datasets.
+
+## About the code
+
+This code was developed for research purposes and is shared for transparency and reproducibility. It is exploratory in nature and not intended to be production-ready or optimized for general use.
 
 If you have any questions, comments, or suggestions for improvement, feel free to reach out by opening an issue.
 
